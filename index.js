@@ -28,17 +28,17 @@ export function wordFrequency(text) {
   const clearSentence = text
     .replace(/['.,\/#!;:{}=\-_`~()]/g, "")
     .split(" ")
-    .filter(el => el)
+    .filter((el) => el)
     .map((a) => {
       return a.toLowerCase();
     });
   clearSentence.forEach((word) => {
-    if(!result[word]){
-      result[word]=1}
-    else{
-      result[word] += 1
+    if (!result[word]) {
+      result[word] = 1;
+    } else {
+      result[word] += 1;
     }
-  })
+  });
 
   return result;
 }
@@ -52,6 +52,25 @@ export function wordFrequency(text) {
 // - Text is case-insensitive.
 // - Words are separated by spaces, and the text may contain punctuation.
 // - Ignore punctuation, and consider only alphabetic characters for word separation.
-export function topNFrequentWords(text, n) {}
+export function topNFrequentWords(text, n) {
+  const frequency = wordFrequency(text);
+  let result = [];
+  for (const word of Object.keys(frequency)) {
+    const el = [];
+    el.push(word);
+    el.push(frequency[word]);
+    result.push(el);
+  }
+  result.sort((a, b) => {
+    if (a[0] < b[0]) {
+      return -1;
+    } else if (a[0] > b[0]) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
 
-console.log(wordFrequency(""));
+  result.sort((a, b) => b[1] - a[1]);
+  return result.splice(0, n);
+}
