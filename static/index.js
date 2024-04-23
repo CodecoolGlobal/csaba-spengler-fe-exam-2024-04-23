@@ -24,7 +24,7 @@ function main() {
     [
       create("h1", {
         className: "intro__header",
-        innerText: "Visualized and clarified by AI",
+        innerText: "Visualized and clarified by AI.",
       }),
     ]
   );
